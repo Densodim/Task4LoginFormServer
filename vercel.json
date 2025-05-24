@@ -4,16 +4,15 @@
     {
       "src": "server/index.ts",
       "use": "@vercel/node"
-    },
-    {
-      "src": "server/public/**",
-      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
       "src": "/api/uk/(.*)",
       "dest": "server/index.ts"
+    },
+    {
+      "handle": "filesystem"
     },
     {
       "src": "/(.*)",
