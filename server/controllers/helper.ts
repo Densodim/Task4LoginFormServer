@@ -1,6 +1,14 @@
 import { Response, Request } from "express";
 import { con } from "../db_connection.js";
 
+type User = {
+  id: number;
+  username: string;
+  email: string;
+  password: string;
+  blocked: boolean;
+};
+
 export const getAllUsers = (req: Request, res: Response) => {
   const query = `SELECT * FROM user_table;`;
   con.query(query, (err, data) => {
@@ -81,5 +89,22 @@ export const deleteUser = (req: Request, res: Response) => {
       });
     }
     return res.status(200).json(data);
+  });
+};
+
+export const checkCredentials = async (
+  username: string,
+  password: string
+): Promise<User | null> => {
+  return new Promise((resolve, reject) => {
+    const query = `SELECT * FROM user_table WHERE username = ${con.escape(
+      username
+    )} AND password = ${con.escape(password)}`;
+    con.query(query, (err, data) => {
+      if (err) {
+        reject(err);
+      }
+      resolve(data[0] || null);
+    });
   });
 };
