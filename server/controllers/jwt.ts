@@ -9,6 +9,11 @@ export const generateToken = (payload: any) => {
   });
 };
 
-export const verifyToken = (token: string) => {
-  return jwt.verify(token, JWT_SECRET);
+export const getUserIdByToken = (token: string): string | null => {
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET) as { id: string };
+    return decoded.id;
+  } catch (error) {
+    return null;
+  }
 };

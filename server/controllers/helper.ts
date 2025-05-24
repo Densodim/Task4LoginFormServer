@@ -100,6 +100,37 @@ export const checkCredentials = async (
     const query = `SELECT * FROM user_table WHERE username = ${con.escape(
       username
     )} AND password = ${con.escape(password)}`;
+    //  console.log("Login attempt:", { username, query });
+    con.query(query, (err, data) => {
+      if (err) {
+        //   console.error("Database error:", err);
+        reject(err);
+      }
+      // console.log("Query result:", data);
+      resolve(data[0] || null);
+    });
+  });
+};
+
+export const getUserByUsername = async (
+  username: string
+): Promise<User | null> => {
+  return new Promise((resolve, reject) => {
+    const query = `SELECT * FROM user_table WHERE username = ${con.escape(
+      username
+    )}`;
+    con.query(query, (err, data) => {
+      if (err) {
+        reject(err);
+      }
+      resolve(data[0] || null);
+    });
+  });
+};
+
+export const getUserById = async (id: number): Promise<User | null> => {
+  return new Promise((resolve, reject) => {
+    const query = `SELECT * FROM user_table WHERE id = ${con.escape(id)}`;
     con.query(query, (err, data) => {
       if (err) {
         reject(err);

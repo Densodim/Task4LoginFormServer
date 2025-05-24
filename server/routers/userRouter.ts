@@ -8,15 +8,17 @@ import {
   checkCredentials,
 } from "../controllers/helper.js";
 import { generateToken } from "../controllers/jwt.js";
+import { authMiddleware } from "../controllers/authMiddleware.js";
 
 const router = Router();
 
 router.post("/login", async (req: Request, res: Response) => {
   try {
     const user = await checkCredentials(req.body.username, req.body.password);
+
     if (user) {
       const token = generateToken({ id: user.id });
-      res.status(201).json({ token });
+      res.status(201).send(token);
     } else {
       res.status(401).json({ error: "Invalid credentials" });
     }
@@ -25,7 +27,7 @@ router.post("/login", async (req: Request, res: Response) => {
   }
 });
 
-router.get("/users", async (req: Request, res: Response) => {
+router.get("/users", authMiddleware, async (req: Request, res: Response) => {
   try {
     await getAllUsers(req, res);
   } catch (error) {
