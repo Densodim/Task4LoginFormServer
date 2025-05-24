@@ -1,0 +1,111 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background-color: #f0f2f5;
+}
+
+.login-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.background-image {
+    /* Keep background-image styles if not using Bootstrap's background utilities */
+    background-size: cover;
+    min-height: 100%; /* Ensure background image fills the column height */
+}
+
+/* Remove or adjust styles that conflict with Bootstrap */
+/* .container, .form-group, .form-group label, etc. */
+
+/* Add any custom styles that are not covered by Bootstrap */
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #007bff; /* Example color, match image */
+}
+
+.journey-text {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.sign-in-heading {
+    font-size: 28px;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    position: relative; /* For icon positioning */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-group input {
+    width: calc(100% - 40px); /* Adjust for icon */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding-right: 35px; /* Space for icon */
+}
+
+.form-group .icon {
+    position: absolute;
+    right: 10px;
+    top: 60%; /* Adjust alignment */
+    transform: translateY(-50%);
+    color: #888;
+}
+
+.remember-me {
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #555;
+}
+
+.remember-me input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.sign-in-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff; /* Example color, match image */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.sign-in-button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+.links {
+    margin-top: 20px;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between; /* Space out the links */
+    color: #555;
+}
+
+.links a {
+    color: #007bff; /* Example color, match image */
+    text-decoration: none;
+}
+
+.links a:hover {
+    text-decoration: underline;
+} 
