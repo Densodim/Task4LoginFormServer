@@ -27,7 +27,7 @@ router.post("/login", async (req: Request, res: Response) => {
   }
 });
 
-router.get("/users", authMiddleware, async (req: Request, res: Response) => {
+router.get("/users", async (req: Request, res: Response) => {
   try {
     await getAllUsers(req, res);
   } catch (error) {
