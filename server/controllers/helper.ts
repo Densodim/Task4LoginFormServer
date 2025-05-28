@@ -23,13 +23,13 @@ export const getAllUsers = (req: Request, res: Response) => {
 };
 
 export const getUsersByName = (
-  colName: string,
+  username: string,
   req: Request,
   res: Response
 ) => {
   const userName = req.params.username;
   const query = `SELECT * FROM user_table WHERE ${con.escapeId(
-    colName
+    userName
   )} LIKE ${con.escape(`%${userName}%`)}`;
   con.query(query, (err, data) => {
     if (err) {
@@ -130,12 +130,20 @@ export const getUserByUsername = async (
 
 export const getUserById = async (id: number): Promise<User | null> => {
   return new Promise((resolve, reject) => {
-    const query = `SELECT * FROM user_table WHERE id = ${con.escape(id)}`;
-    con.query(query, (err, data) => {
+    const query = "SELECT * FROM user_table WHERE id = ?";
+    con.query(query, [id], (err, data) => {
       if (err) {
-        reject(err);
+        console.error("Error fetching user by id:", err);
+        reject(new Error("Failed to fetch user"));
+        return;
       }
-      resolve(data[0] || null);
+
+      if (!data || data.length === 0) {
+        resolve(null);
+        return;
+      }
+
+      resolve(data[0]);
     });
   });
 };
