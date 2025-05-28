@@ -11,7 +11,7 @@ type User = {
 };
 
 export const getAllUsers = (req: Request, res: Response) => {
-  const query = `SELECT id, username, email, blocked, last_login FROM user_table ORDER BY last_login DESC`;
+  const query = `SELECT * FROM user_table ORDER BY last_login DESC`;
   con.query(query, (err, data) => {
     if (err) {
       console.error("Error fetching users:", err);
