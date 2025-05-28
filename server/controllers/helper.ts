@@ -130,19 +130,25 @@ export const getUserByUsername = async (
 
 export const getUserById = async (id: number): Promise<User | null> => {
   return new Promise((resolve, reject) => {
+    console.log("Fetching user with ID:", id);
     const query = "SELECT * FROM user_table WHERE id = ?";
+    console.log("Query:", query);
     con.query(query, [id], (err, data) => {
       if (err) {
-        console.error("Error fetching user by id:", err);
+        console.error("Database error:", err);
         reject(new Error("Failed to fetch user"));
         return;
       }
 
+      console.log("Query result:", data);
+
       if (!data || data.length === 0) {
+        console.log("No user found");
         resolve(null);
         return;
       }
 
+      console.log("User found:", data[0]);
       resolve(data[0]);
     });
   });
