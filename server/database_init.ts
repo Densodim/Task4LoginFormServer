@@ -9,9 +9,10 @@ export function initializeDatabase() {
         email VARCHAR(255) NOT NULL,
         password VARCHAR(255) NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        last_login DATETIME DEFAULT CURRENT_TIMESTAMP,
         blocked BOOLEAN DEFAULT FALSE,
         UNIQUE INDEX unique_username (username),
-        UNIQUE INDEX unique_email (email)
+        UNIQUE INDEX unique_email (email),
       )
     `;
 
