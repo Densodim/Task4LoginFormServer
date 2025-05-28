@@ -21,11 +21,16 @@ router.post("/login", async (req: Request, res: Response) => {
 
     if (user) {
       const token = generateToken({ id: user.id });
-      res.status(201).send(token);
+      const { password, ...userWithoutPassword } = user;
+      res.status(201).json({
+        token,
+        user: userWithoutPassword,
+      });
     } else {
       res.status(401).json({ error: "Invalid credentials" });
     }
   } catch (error) {
+    console.error("Login error:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
